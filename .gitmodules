@@ -1,0 +1,21 @@
+[submodule "deps/glew"]
+	path = deps/glew
+	url = https://github.com/Perlmint/glew-cmake
+[submodule "deps/glfw"]
+	path = deps/glfw
+	url = https://github.com/glfw/glfw
+[submodule "deps/glm"]
+	path = deps/glm
+	url = https://github.com/g-truc/glm
+[submodule "deps/cppformat"]
+	path = deps/cppformat
+	url = https://github.com/cppformat/cppformat
+[submodule "deps/easylogging"]
+	path = deps/easylogging
+	url = https://github.com/easylogging/easyloggingpp
+[submodule "deps/assimp"]
+	path = deps/assimp
+	url = https://github.com/assimp/assimp
+[submodule "deps/soil"]
+	path = deps/soil
+	url = https://github.com/kbranigan/Simple-OpenGL-Image-Library
