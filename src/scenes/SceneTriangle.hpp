@@ -4,14 +4,16 @@
 
 using namespace glm;
 
-class Scene
+class SceneTriangle
 {
 private:
-    GLuint _shaderProgram;
-    GLuint _vao;
+    GLuint _shaderProgram = 0;
+    GLuint _vao = 0;
+    GLuint _vertexBuffer;
+    GLuint _indexBuffer;
 
-    mat4 view;
-    mat4 proj;
+    mat4 _view;
+    mat4 _proj;
 
     struct Vertex
     {
@@ -19,8 +21,8 @@ private:
         glm::vec3 color;
     };
 public:
-    Scene();
-    ~Scene();
+    SceneTriangle();
+    ~SceneTriangle();
     void draw();
 
 };

@@ -1,7 +1,7 @@
-#version 330
+#version 450
 
 smooth in vec4 smoothColor;
-layout(location=0) out vec4 fragColor;
+out vec4 fragColor;
 
 void main()
 {

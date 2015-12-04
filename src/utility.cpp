@@ -36,18 +36,22 @@ GLuint compileShader(GLenum shaderType, string fileName)
     glShaderSource(shader, 1, &shaderSource, nullptr);
     glCompileShader(shader);
 
-    GLint logLength = 0;
-    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
-    GLsizei l = 0;
-    vector<char> compileLog(logLength);
-    glGetShaderInfoLog(shader, logLength, &logLength, &compileLog[0]);
-    if(logLength != 0)
+    GLint isCompiled = 0;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
+
+    if(isCompiled == GL_FALSE)
     {
+        GLint logLength = 0;
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
+        GLsizei l = 0;
+        vector<char> compileLog(logLength);
+        glGetShaderInfoLog(shader, logLength, &logLength, &compileLog[0]);
         throw fmt::format("Error compiling shader {0}:\n{1}\n{2}", fileName, &compileLog[0], shaderSource);
     }
     else
     {
         LOG(INFO) << fmt::format("Shader {0} compiled successfully.", fileName);
+        return shader;
     }
 }
 
@@ -59,16 +63,19 @@ GLuint linkProgram(vector<GLuint> shaders)
         glAttachShader(shaderProgram, shader);
     }
     glLinkProgram(shaderProgram);
-    GLint logLength;
-    glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &logLength);
-    vector<char> linkLog(logLength);
-    glGetProgramInfoLog(shaderProgram, logLength, &logLength, &linkLog[0]);
-    if(logLength != 0)
+    GLint isLinked = 0;
+    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &isLinked);
+    if(isLinked == GL_FALSE)
     {
+        GLint logLength;
+        glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &logLength);
+        vector<char> linkLog(logLength);
+        glGetProgramInfoLog(shaderProgram, logLength, &logLength, &linkLog[0]);
         throw fmt::format("Error linking program\n{0}", &linkLog[0]);
     }
     else
     {
         LOG(INFO) << "Program linked successfully.";
+        return shaderProgram;
     }
 }

@@ -4,7 +4,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
-#include "Scene.hpp"
+#include "scenes/SceneRipple.hpp"
+#include "scenes/SceneTriangle.hpp"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -44,12 +45,13 @@ int main()
 
     try
     {
-        Scene scene;
+        SceneRipple scene;
+
         while(!glfwWindowShouldClose(window))
         {
             glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
+            scene.draw();
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
