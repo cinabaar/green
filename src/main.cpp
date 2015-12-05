@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include "scenes/SceneRipple.hpp"
 #include "scenes/SceneTriangle.hpp"
+#include <chrono>
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -14,6 +15,9 @@ const int WINDOW_HEIGHT = 900;
 const char* WINDOW_TITLE = "Green";
 
 using std::string;
+
+using Clock = std::chrono::high_resolution_clock;
+using seconds = std::chrono::duration<float>;
 
 int main()
 {
@@ -45,12 +49,17 @@ int main()
 
     try
     {
+        glfwSetKeyCallback(window, Input::keyCallback);
         SceneRipple scene;
+        Clock::time_point startTime = Clock::now();
 
         while(!glfwWindowShouldClose(window))
         {
-            glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            seconds time = Clock::now()- startTime;
+            startTime = Clock::now();
 
+            glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            scene.update(time.count());
             scene.draw();
             glfwSwapBuffers(window);
             glfwPollEvents();

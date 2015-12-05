@@ -33,6 +33,9 @@ include_directories(deps/glm)
 add_subdirectory(deps/soil)
 include_directories(deps/soil/src)
 
+#nano signal-slots
+include_directories(deps/nano)
+
 IF (WIN32)
 add_definitions(-DM_PI=3.14159265358979323846)
 add_definitions(-DM_PI_2=1.57079632679489661923)

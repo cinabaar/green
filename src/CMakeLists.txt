@@ -2,7 +2,7 @@ add_subdirectory(shaders)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-set(SOURCE_FILES main.cpp utility.cpp utility.hpp
+set(SOURCE_FILES main.cpp utility.cpp utility.hpp input/Input.cpp input/Input.hpp
         scenes/SceneTriangle.cpp scenes/SceneTriangle.hpp
         scenes/SceneRipple.cpp scenes/SceneRipple.hpp)
 add_executable(green ${SOURCE_FILES})
